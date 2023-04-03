@@ -1,2 +1,22 @@
 # Metro-Fare-Calculator
-The api takes a CSV string and calculates the fare using an drools rule engine
+The api takes a CSV string and calculates the fare using an drools rule engine. It calculates the fare using the following rules in consideration:
+1. Journey start line
+2. Journey end line
+3. Peak / Non-peak hours for Day of week
+4.  Max day fare
+5. Max week fare
+
+
+Installation
+To run this project, you will need to have Java 11 or higher installed on your system.
+
+Clone this repository to your local machine.
+Open a terminal in the project directory.
+Run ./mvnw spring-boot:run (on Unix-based systems) or mvnw.cmd spring-boot:run (on Windows) to start the application.
+
+
+
+
+API:
+
+
