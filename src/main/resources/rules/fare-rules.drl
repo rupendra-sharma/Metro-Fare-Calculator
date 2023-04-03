@@ -1,0 +1,21 @@
+import com.sma.calculator.model.MetroTicket;
+dialect "mvel"
+ 
+ 
+rule "Weekday green to green peak hour"
+	when
+	   $ticket:  MetroTicket(fromLine.equals("green"), toLine.equals("red"), dayOfWeek in ("MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY"))
+	   $time: String() from $ticket.getStartTime().toString().substring(11, 19)
+	   eval($time >= "08:00:00" && $time <= "10:00:00" || $time >= "16:30:00" && $time <= "19:00:00")
+	then
+	    $ticket.setFare(2);
+	    System.out.println("day of week : " + $ticket.getDayOfWeek() + " fare1: " + $ticket.getFare())
+end
+
+rule "Weekday green to red peak hour"
+	when
+	   $ticket:  MetroTicket(fromLine.equals("green"), toLine.equals("red"))
+	then
+	    $ticket.setFare(3);
+	    System.out.println("day of week 2 : " + $ticket.getDayOfWeek() + " fare2: " + $ticket.getFare())
+end
