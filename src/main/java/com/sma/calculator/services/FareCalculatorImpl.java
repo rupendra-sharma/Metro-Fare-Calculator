@@ -14,7 +14,7 @@ import com.sma.calculator.model.MetroTicket;
 import com.sma.helper.CsvProcessor;
 
 /**
- * 
+ * Service class for Fare calculation
  *
  */
 @Service
@@ -24,23 +24,35 @@ public class FareCalculatorImpl implements FareCalculator {
 	private CsvProcessor csvProcessor;
 	
 	
+	
 	/*
 	 * returns: MetroTicket model generated from the input CSV and with fare
 	 */
 	@Override
-	public MetroTicket Calculate(String csv) {
-		
-		//Create ticket model
-		MetroTicket ticket = csvProcessor.csvToTicket(csv);
-		
-		//Process rules to identify the fare
-		KieSession kieSession = kieContainer.newKieSession();
-        kieSession.insert(ticket);
-        kieSession.fireAllRules();
-        kieSession.dispose();
-        return ticket;
+	public MetroTicket calculate(String csv) throws Exception {
+	    // Create ticket model
+	    MetroTicket ticket;
+	    try {
+	        ticket = csvProcessor.csvToTicket(csv);
+	    } catch (Exception e) {
+	        throw new Exception("Error parsing CSV data", e);
+	    }
+
+	    // Process rules to identify the fare
+	    KieSession kieSession = null;
+	    try {
+	        kieSession = kieContainer.newKieSession();
+	        kieSession.insert(ticket);
+	        kieSession.fireAllRules();
+	        return ticket;
+	    } catch (Exception e) {
+	        throw new Exception("Error processing rules", e);
+	    } finally {
+	        if (kieSession != null) {
+	            kieSession.dispose();
+	        }
+	    }
 	}
-	
-	
+
 
 }

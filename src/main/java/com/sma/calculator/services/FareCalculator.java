@@ -13,5 +13,5 @@ import com.sma.calculator.model.MetroTicket;
  *
  */
 public interface FareCalculator {
-	MetroTicket Calculate(String ticket);
+	MetroTicket calculate(String ticket) throws Exception;
 }

@@ -19,7 +19,7 @@ import com.sma.calculator.model.MetroTicket;
 import com.sma.calculator.services.FareCalculator;
 
 /**
- * 
+ * API for fare calculator
  *
  */
 @RestController
@@ -29,31 +29,26 @@ public class MetroFareController {
 	FareCalculator calculator;
 	
 	/*
-	 * 
+	 * Method to calculate fare for a journey
+	 * returns the Journey object (MetroTicket) with journey fare
 	 */
 	@PostMapping(value= "/calculate", consumes = MediaType.TEXT_PLAIN_VALUE)
-	public MetroTicket calculateFare(@RequestBody String ticket){
-		System.out.println(ticket);
-		MetroTicket newTicket = calculator.Calculate(ticket);
-		
-		return newTicket;
-		
-		
+	public ResponseEntity<?> calculateFare(@RequestBody String ticket){
+	    try {
+	        MetroTicket newTicket = calculator.calculate(ticket);
+	        return ResponseEntity.ok(newTicket);
+	    } catch (Exception e) {
+	        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error calculating fare: " + e.getMessage());
+	    }
 	}
+	
+	
 	
 	/*
-	 * 
+	 * Test api
 	 */
-	@GetMapping("/hello")
-	public String hello(){
-		return "hello";
-		
-		
-	}
-	
-	
 	@GetMapping("/")
 	public String index() {
-		return "Greetings from Spring Boot!";
+		return "api test!";
 	}
 }

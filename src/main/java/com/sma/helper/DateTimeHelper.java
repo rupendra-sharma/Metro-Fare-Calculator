@@ -9,6 +9,7 @@ package com.sma.helper;
 import java.time.DayOfWeek;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 import org.springframework.stereotype.Component;
 
@@ -22,10 +23,15 @@ public class DateTimeHelper {
 	/*
 	 * returns DayOfWeek
 	 */
-	public String getDayOfWeek(String dateString) {
-		DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
-        LocalDateTime dateTime = LocalDateTime.parse(dateString, formatter);
-        DayOfWeek dayOfWeek = dateTime.getDayOfWeek();
-        return dayOfWeek.toString();
+	public String getDayOfWeek(String dateString) throws DateTimeParseException {
+	    try {
+	        DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
+	        LocalDateTime dateTime = LocalDateTime.parse(dateString, formatter);
+	        DayOfWeek dayOfWeek = dateTime.getDayOfWeek();
+	        return dayOfWeek.toString();
+	    } catch (DateTimeParseException ex) {
+	        throw new DateTimeParseException("Invalid date format", dateString, 0, ex);
+	    }
 	}
+
 }

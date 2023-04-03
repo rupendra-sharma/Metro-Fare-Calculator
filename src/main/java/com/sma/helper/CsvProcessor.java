@@ -25,15 +25,17 @@ public class CsvProcessor {
 	/*
 	 * returns Model mapping with the CSV string
 	 */
-	public MetroTicket csvToTicket(String csv) {
-		//String csv = "Green, Green, 2021-03-24T07:58:30";
-		String[] values = csv.split(",");
-		MetroTicket ticket = new MetroTicket();
-		ticket.setFromLine(values[0].trim());
-		ticket.setToLine(values[1].trim());
-		ticket.setStartTime(values[2].trim());
-		ticket.setDayOfWeek(dateTimeHelper.getDayOfWeek(ticket.getStartTime()));
-		
-		return ticket;
+	public MetroTicket csvToTicket(String csv) throws IllegalArgumentException {
+	    String[] values = csv.split(",");
+	    if (values.length != 3) {
+	        throw new IllegalArgumentException("CSV must have 3 values separated by commas");
+	    }
+	    MetroTicket ticket = new MetroTicket();
+	    ticket.setFromLine(values[0].trim());
+	    ticket.setToLine(values[1].trim());
+	    ticket.setStartTime(values[2].trim());
+	    ticket.setDayOfWeek(dateTimeHelper.getDayOfWeek(ticket.getStartTime()));
+	    
+	    return ticket;
 	}
 }
