@@ -23,3 +23,6 @@ Run ./mvnw spring-boot:run (on Unix-based systems) or mvnw.cmd spring-boot:run (
 *API:*
 
 
+*Desired high level architecture:*
+![image](https://user-images.githubusercontent.com/894924/229403748-6c90ca80-f179-4c10-a441-af670177259b.png)
+
