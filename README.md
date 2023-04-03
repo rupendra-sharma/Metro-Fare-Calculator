@@ -21,6 +21,11 @@ Run ./mvnw spring-boot:run (on Unix-based systems) or mvnw.cmd spring-boot:run (
 
 
 *API:*
+Test the API using the cURL request:
+curl --location 'http://localhost:8080/calculate' \
+--header 'Content-Type: text/plain' \
+--data '"Green, Green, 2021-03-24T07:58:30"'
+
 
 
 *Desired high level architecture:*
