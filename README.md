@@ -1,5 +1,7 @@
 # Metro-Fare-Calculator
-The api takes a CSV string and calculates the fare using an drools rule engine. It calculates the fare using the following rules in consideration:
+The api takes a CSV string and calculates the fare using a drools rule engine. 
+
+It calculates the fare using the following rules in consideration:
 1. Journey start line
 2. Journey end line
 3. Peak / Non-peak hours for Day of week
