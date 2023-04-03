@@ -9,7 +9,8 @@ It calculates the fare using the following rules in consideration:
 5. Max week fare
 
 
-Installation
+*Installation*
+
 To run this project, you will need to have Java 11 or higher installed on your system.
 
 Clone this repository to your local machine.
@@ -19,6 +20,6 @@ Run ./mvnw spring-boot:run (on Unix-based systems) or mvnw.cmd spring-boot:run (
 
 
 
-API:
+*API:*
 
 
